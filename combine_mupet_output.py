@@ -3,17 +3,16 @@ import numpy as np
 import pandas as pd
 import os
 from tkinter import *
-from tkinter import filedialog
+from tkinter import filedialog, simpledialog
 
 root = Tk()
-
 
 ## gathering files
 meta_filename = filedialog.askopenfilename(title = 'Select the metadata file')
 df_filename = filedialog.askopenfilename(title = 'Select the batch output file')
 
 ## opening files
-meta = pd.read_csv(meta_filename)[['Pup Number', 'File legend']]
+meta = pd.read_csv(meta_filename)[['Pup Number', 'File legend', 'Sex', 'Genotype', 'litter_size']]
 df = pd.read_csv(df_filename)
 
 ## cleaning output dataframe
@@ -37,6 +36,12 @@ output = df.set_index('file_legend').join(meta.set_index('File legend'))
 
 ## asking for output directory and outputting the combined file
 output_dir = filedialog.askdirectory(title = 'Select the output directory')
-output.to_csv(os.path.join(output_dir, 'combined_data.csv'))
 
-print('All Done! You can find the processed output here:'+ output_dir + '/combined_data.csv')
+## get a suffix for the filenaming
+suffix = simpledialog.askstring('', 'Suffix for the filename?')
+
+
+## write out the final csv
+output.to_csv(os.path.join(output_dir, 'combined_data_' + suffix + '.csv'))
+
+print('All Done! You can find the processed output here: '+ output_dir + '/combined_data' + suffix + '.csv')
