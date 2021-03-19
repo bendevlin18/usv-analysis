@@ -44,4 +44,4 @@ suffix = simpledialog.askstring('', 'Suffix for the filename?')
 ## write out the final csv
 output.to_csv(os.path.join(output_dir, 'combined_data_' + suffix + '.csv'))
 
-print('All Done! You can find the processed output here: '+ output_dir + '/combined_data' + suffix + '.csv')
+print('All Done! You can find the processed output here: '+ output_dir + '/combined_data_' + suffix + '.csv')

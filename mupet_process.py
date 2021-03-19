@@ -23,10 +23,11 @@ for file in files:
         'freq_range' : [np.max(df['mean frequency (kHz)']) -  np.min(df['mean frequency (kHz)'])],
         'freq_band' : [np.mean(df['frequency bandwidth (kHz)'])],
         'avg_energy' : [np.mean(df['total syllable energy (dB)'])],
-        'fname' : [file.split('.csv')[0]]
+        'avg_frequency' : [np.mean(df['mean frequency (kHz)'])],
+        'filename' : [file.split('.csv')[0]]
            }
 
-    final_df = final_df.append(pd.DataFrame.from_dict(data).set_index('fname'))
+    final_df = final_df.append(pd.DataFrame.from_dict(data))
 
 
 
